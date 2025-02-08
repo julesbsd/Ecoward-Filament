@@ -65,4 +65,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Action::class);
     }
+    public function challenges()
+    {
+        return $this->belongsToMany(Challenge::class, 'user_challenges')
+            ->withPivot('current_level', 'progress')
+            ->withTimestamps();
+    }
 }

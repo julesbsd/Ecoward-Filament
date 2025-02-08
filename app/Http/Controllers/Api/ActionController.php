@@ -68,10 +68,16 @@ class ActionController extends Controller
                 ->first();
 
             if (!$userChallenge) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User is not enrolled in this challenge.'
-                ], 404);
+                $userChallenge = UserChallenge::create([
+                    'user_id' => $user->id,
+                    'challenge_id' => $challenge->id,
+                    'current_level' => 1,
+                    'progress' => 0,
+                ]);
+                // return response()->json([
+                //     'status' => 'error',
+                //     'message' => 'User is not enrolled in this challenge.'
+                // ], 404);
             }
 
             // Mise à jour de la progression

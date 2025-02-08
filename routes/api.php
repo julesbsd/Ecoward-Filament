@@ -39,7 +39,7 @@ Route::post('/reset-password', [UserController::class, 'resetPassword']);
 
 Route::get('/challenge', [ActionController::class, 'testChallenge']);
 
-Route::middleware(['auth.api', 'auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/me', [UserController::class, 'me']);
     Route::get('/autologin', [UserController::class, 'autologin']);
