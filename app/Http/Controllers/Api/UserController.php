@@ -184,7 +184,6 @@ class UserController extends Controller
         if (!Auth::check()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-        // $userPoints = $this->getUserPoints(Auth::user()->id);
 
         $step = Step::where('user_id', Auth::user()->id)
             ->whereDate('created_at', now()->format('Y-m-d'))

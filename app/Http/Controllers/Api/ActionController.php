@@ -74,10 +74,6 @@ class ActionController extends Controller
                     'current_level' => 1,
                     'progress' => 0,
                 ]);
-                // return response()->json([
-                //     'status' => 'error',
-                //     'message' => 'User is not enrolled in this challenge.'
-                // ], 404);
             }
 
             // Mise à jour de la progression

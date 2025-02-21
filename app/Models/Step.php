@@ -10,8 +10,8 @@ class Step extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
-        'steps', 
+        'user_id',
+        'steps',
         'points',
         'created_at',
         'updated_at'
