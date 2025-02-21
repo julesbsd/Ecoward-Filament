@@ -141,12 +141,6 @@ class ActionController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage()
             ], 401);
-        } catch (\Exception $e) {
-            Log::error('Error creating action: ' . $e->getMessage());
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 401);
         }
     }
 }

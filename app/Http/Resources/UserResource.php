@@ -24,7 +24,7 @@ class UserResource extends JsonResource
             ],
             'points' => $this->points,
             'steps' => $this->steps,
-            'profile_photo_url' => $this->profile_photo_url,
+            'profile_photo_url' => $this->profile_photo_path,
             'company' => $this->company ? [
                 'id' => $this->company->id,
                 'name' => $this->company->name,

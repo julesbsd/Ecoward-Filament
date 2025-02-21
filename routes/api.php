@@ -18,10 +18,6 @@ Route::post('/register', [UserController::class, 'register']);
  */
 Route::post('/login', [UserController::class, 'login']);
 
-/**
- * Refresh token
- */
-// Route::post('refresh-token', [UserController::class, 'refreshToken']);
 
 /**
  * Liste des utilisateurs

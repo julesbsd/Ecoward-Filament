@@ -14,12 +14,12 @@ class RankingController extends Controller
         try {
             $companyId = auth()->user()->company_id;
 
-            $CompanyUsersRank = User::where('company_id', $companyId)
+            $company_users_rank = User::where('company_id', $companyId)
             ->where('role_id', 1)
             ->orderBy('points', 'desc')
             ->get();
 
-            $UsersRank = User::where('role_id', 1)
+            $users_rank = User::where('role_id', 1)
             ->orderBy('points', 'desc')
             ->limit(100)
             ->get();
@@ -28,6 +28,6 @@ class RankingController extends Controller
             return response()->json(['error' => $th->getMessage()], 500);
         }
 
-        return response()->json(['CompanyRanking' => $CompanyUsersRank, 'GlobalRanking' => $UsersRank], 200);
+        return response()->json(['CompanyRanking' => $company_users_rank, 'GlobalRanking' => $users_rank], 200);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\ActionResource\Widgets\ActionOverview;
-use App\Filament\Resources\ActionResource\Widgets\CustomerOverview;
+use App\Filament\Gestionnaire\Resources\UserResource\Widgets\CompanyAction;
+use App\Filament\Gestionnaire\Resources\UserResource\Widgets\CompanyCO2;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -20,26 +20,29 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider
+class GestionnairePanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('admin')
-            ->path('admin')
+            ->default()
+            ->id('gestionnaire')
+            ->path('gestionnaire')
             ->login()
             ->colors([
-                'primary' => '#00E676',
+                'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/Gestionnaire/Resources'), for: 'App\\Filament\\Gestionnaire\\Resources')
+            ->discoverPages(in: app_path('Filament/Gestionnaire/Pages'), for: 'App\\Filament\\Gestionnaire\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Gestionnaire/Widgets'), for: 'App\\Filament\\Gestionnaire\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                ActionOverview::class,
+                Widgets\FilamentInfoWidget::class,
+                CompanyAction::class,
+                CompanyCO2::class,
             ])
             ->middleware([
                 EncryptCookies::class,

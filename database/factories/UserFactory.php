@@ -20,6 +20,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->name();
+
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
@@ -28,7 +30,7 @@ class UserFactory extends Factory
             'role_id' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
+            'profile_photo_path' => 'https://ui-avatars.com/api/?format=png&name=' . urlencode($name) . '&color=7F9CF5&background=EBF4FF',
         ];
     }
 }

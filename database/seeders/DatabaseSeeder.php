@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Company;
 use App\Models\Coupon;
 use App\Models\Reward;
@@ -27,25 +25,22 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ChallengeTypesSeeder::class,
             ActionTypeSeeder::class,
-            TrashSeeder::class, // Assurez-vous que TrashSeeder est appelé avant de créer les actions
+            TrashSeeder::class,
             ChallengeSeeder::class,
         ]);
 
-        // User::factory(50)->create();
 
         Company::factory(20)->create()->each(function ($company) {
             // Créer un organisateur pour chaque entreprise
-            $organizer = User::factory()->create([
+            User::factory()->create([
                 'company_id' => $company->id,
                 'role_id' => 3, // Role ID for organizer
             ]);
 
-            // Créer des utilisateurs pour chaque entreprise
-            $users = User::factory(rand(20, 100))->create([
+            $users = User::factory(rand(20, 200))->create([
                 'company_id' => $company->id,
             ]);
 
-            // Créer des actions pour chaque utilisateur
             $users->each(function ($user) {
                 $trash = Trash::inRandomOrder()->first();
                 if ($trash) {
@@ -73,6 +68,7 @@ class DatabaseSeeder extends Seeder
                     WHERE a.user_id = users.id AND a.status = 'accepted'
                 )
                 WHERE role_id = 1;
-        ");
+        "
+        );
     }
 }

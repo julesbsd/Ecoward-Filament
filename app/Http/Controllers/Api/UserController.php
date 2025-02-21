@@ -48,9 +48,9 @@ class UserController extends Controller
                 ->first();
 
             $user = User::with('role')
-            ->with('actions')
-            ->with('actions.trash')
-            ->find(Auth::user()->id);
+                ->with('actions')
+                ->with('actions.trash')
+                ->find(Auth::user()->id);
 
             $user->steps = $steps ? $steps->steps : 0;
 
@@ -86,8 +86,7 @@ class UserController extends Controller
 
         $password = bcrypt($request['password']);
 
-        $role = Role::where('name', 'user')->first();
-        $user = User::create([
+        User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => $password,
@@ -115,15 +114,20 @@ class UserController extends Controller
         // Mise à jour des informations
         $user->name = $request->name;
         $user->email = $request->email;
-        if ($request->has('profileImage')) {
-            $imageData = $request->profileImage;
-            $imageName = 'profile_' . uniqid() . '.png';
-            Storage::disk('public')->put($imageName, base64_decode($imageData));
-            $user->profile_photo_path = $imageName;
-        }
-        $user->save();
-        $userPoints = $this->getUserPoints(Auth::user()->id);
+        try {
 
+
+            if ($request->has('profileImage') && $request->profileImage != "") {
+                $imageData = $request->profileImage;
+                $imageName = 'profile_' . uniqid() . '.png';
+                Storage::disk('public')->put($imageName, base64_decode($imageData));
+                $user->profile_photo_path = $imageName;
+            }
+            $user->save();
+            $userPoints = $this->getUserPoints(Auth::user()->id);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
 
         return response()->json([
             'user' => new UserResource($user),
@@ -190,8 +194,6 @@ class UserController extends Controller
         $user->steps = $step ? $step->steps : 0;
         return response()->json([
             'user' => new UserResource($user),
-            // 'steps' => $step ? $step->steps : 0,
-            // 'points' => $userPoints,
         ], 200);
     }
 
@@ -229,8 +231,7 @@ class UserController extends Controller
             ->total_step_points;
 
         // Additionner les deux totaux de points
-        $totalPoints = $totalTrashPoints + $totalStepPoints;
-        return $totalPoints;
+        return $totalTrashPoints + $totalStepPoints;
     }
 
     public function testbase64Image()

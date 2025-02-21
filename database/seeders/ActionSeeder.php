@@ -14,30 +14,34 @@ class ActionSeeder extends Seeder
      */
     public function run(): void
     {
+        $description = "description de l'action";
+        $location = "latitude: 48.8566, longitude: 2.3522";
+        $format = 'Y-m-d H:i:s';
+
         Action::insert([
             [
                 'action_type_id' => 1,
                 // 'trash_id' => 1,
                 'user_id' => 1,
                 'challenge_id' => 1,
-                'description' => "description de l'action",
+                'description' => $description,
                 'image_action' => 'images/bouteille.jpg',
                 'status' => 'pending',
-                'location' => 'latitude: 48.8566, longitude: 2.3522',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'location' => $location,
+                'created_at' => Carbon::now()->format($format),
+                'updated_at' => Carbon::now()->format($format),
             ],
             [
                 'action_type_id' => 1,
                 // 'trash_id' => 2,
                 'user_id' => 11,
                 'challenge_id' => 1,
-                'description' => "description de l'action",
+                'description' => $description,
                 'image_action' => 'image 1',
                 'status' => 'accepted',
-                'location' => 'latitude: 48.8566, longitude: 2.3522',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'location' => $location,
+                'created_at' => Carbon::now()->format($format),
+                'updated_at' => Carbon::now()->format($format),
             ],
             [
                 'action_type_id' => 1,
@@ -45,11 +49,11 @@ class ActionSeeder extends Seeder
                 'user_id' => 11,
                 'status' => 'refused',
                 'challenge_id' => 1,
-                'description' => "description de l'action",
+                'description' => $description,
                 'image_action' => 'image 1',
-                'location' => 'latitude: 48.8566, longitude: 2.3522',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'location' => $location,
+                'created_at' => Carbon::now()->format($format),
+                'updated_at' => Carbon::now()->format($format),
             ],
             
         ]);

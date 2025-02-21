@@ -13,9 +13,6 @@ class StepController extends Controller
 {
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'steps' => 'required|integer',
-        ]);
 
         $user = User::find(Auth::user()->id);
         if (!$user) {

@@ -6,12 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     * @TODO: créer le trigger pour les points de l'utilisateur
-     * lorsque qu'il termine un défi
-     */
-    
     public function up(): void
     {
         Schema::create('challenges', function (Blueprint $table) {

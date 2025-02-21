@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'name' => 'Boismond',
                 'email' => 'admin@ecoward.com',
                 'email_verified_at' => now(),
-                'company_id' => NULL,
+                'company_id' => null,
                 'role_id' => 2, // 'admin
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),

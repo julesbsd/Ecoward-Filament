@@ -12,40 +12,42 @@ class TrashSeeder extends Seeder
      */
     public function run(): void
     {
+        $image = 'image 1';
+
         Trash::insert([
             [
                 "name" => 'plastique',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ],
             [
                 'name' => 'Métaux',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ],
             [
                 'name' => 'Verre',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ],
             [
                 'name' => 'Papier / Carton',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ],
             [
                 'name' => 'Textile',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ],
             [
                 'name' => 'Matière organique',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ],
             [
                 'name' => 'Mégots',
-                'image' => 'image 1',
+                'image' => $image,
                 'points' => 10
             ]
         ],);
