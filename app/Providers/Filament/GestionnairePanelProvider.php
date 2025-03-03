@@ -40,7 +40,7 @@ class GestionnairePanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Gestionnaire/Widgets'), for: 'App\\Filament\\Gestionnaire\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\FilamentInfoWidget::class,
                 CompanyAction::class,
                 CompanyCO2::class,
             ])

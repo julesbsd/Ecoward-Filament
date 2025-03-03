@@ -28,10 +28,12 @@ class UserResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Name')
-                    ->required(),
+                    ->required()
+                    ->disabled(),
                 TextInput::make('email')
                     ->label('Email')
-                    ->required(),
+                    ->required()
+                    ->disabled(),
                 TextInput::make('password')
                     ->label('Password')
                     ->password()
