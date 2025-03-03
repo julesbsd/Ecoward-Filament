@@ -238,4 +238,10 @@ class UserController extends Controller
         $user = User::find(1);
         return response()->json(['profile_photo_url' => $user->profile_photo_path]);
     }
+
+    public function getPoints()
+    {
+        $userPoints = Auth::user()->points;
+        return response()->json(['points' => $userPoints, 200]);
+    }
 }

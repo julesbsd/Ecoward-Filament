@@ -75,7 +75,10 @@ class ActionResource extends Resource
                 TextColumn::make('user.name')->label('Utilisateur'),
                 TextColumn::make('trash.name')->label('Déchet'),
                 TextColumn::make('quantity')->label('Quantité'),
-                TextColumn::make('challenge.points')->label('Points')->badge(),
+                TextColumn::make('challenge.points')
+                    ->label('Points')
+                    ->badge()
+                    ->getStateUsing(fn ($record) => $record->challenge->points * $record->quantity),
                 TextColumn::make('status')->label('Status')->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'accepted' => 'success',
@@ -92,7 +95,17 @@ class ActionResource extends Resource
                     ->height(100),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'En Cours',
+                        'accepted' => 'Accepté',
+                        'refused' => 'Annulé',
+                    ])
+                    ->label('Status'),
+                    Tables\Filters\SelectFilter::make('user_id')
+                        ->relationship('user', 'name')
+                        ->searchable()
+                        ->label('Utilisateur'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -121,6 +134,7 @@ class ActionResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
+            ->orderByRaw("FIELD(status, 'pending') DESC")
             ->orderBy('created_at', 'desc');
     }
 

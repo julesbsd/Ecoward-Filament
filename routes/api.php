@@ -38,8 +38,13 @@ Route::get('/challenge', [ActionController::class, 'testChallenge']);
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/me', [UserController::class, 'me']);
+
     Route::get('/autologin', [UserController::class, 'autologin']);
+
+    Route::get('/user/points', [UserController::class, 'getPoints']);
+
     Route::get('/logout', [UserController::class, 'logout']);
+
     Route::post('/save-step', [StepController::class, 'store']);
 
     Route::post('/user/update', [UserController::class, 'update']);

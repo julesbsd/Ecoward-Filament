@@ -61,6 +61,9 @@ class ActionRelationManager extends RelationManager
                 TextColumn::make('status'),
                 TextColumn::make('user.name')->label('User Name'),
                 TextColumn::make('trash.name')->label('Déchet'),
+                /**
+                 * @todo modifier la colonne
+                 */
                 TextColumn::make('challenge.points')->label('Points'),
             ])
             ->filters([
