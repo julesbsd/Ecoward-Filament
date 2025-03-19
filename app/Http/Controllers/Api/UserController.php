@@ -244,4 +244,10 @@ class UserController extends Controller
         $userPoints = Auth::user()->points;
         return response()->json(['points' => $userPoints, 200]);
     }
+
+    public function getActions()
+    {
+        $actions = Auth::user()->actions;
+        return response()->json(['actions' => $actions, 200]);
+    }
 }

@@ -43,6 +43,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/user/points', [UserController::class, 'getPoints']);
 
+    Route::get('/user/actions', [UserController::class, 'getActions']);
+
     Route::get('/logout', [UserController::class, 'logout']);
 
     Route::post('/save-step', [StepController::class, 'store']);

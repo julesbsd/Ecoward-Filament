@@ -30,13 +30,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        // Création dans l'odre des tables
         Company::factory(20)->create()->each(function ($company) {
             // Créer un organisateur pour chaque entreprise
             User::factory()->create([
                 'company_id' => $company->id,
-                'role_id' => 3, // Role ID for organizer
+                'role_id' => 3, // Role ID pour organisateur
             ]);
-
+            // Créer des utilisateurs pour chaque entreprise
             $users = User::factory(rand(20, 200))->create([
                 'company_id' => $company->id,
             ]);
@@ -44,6 +45,7 @@ class DatabaseSeeder extends Seeder
             $users->each(function ($user) {
                 $trash = Trash::inRandomOrder()->first();
                 if ($trash) {
+                    // Créer des actions pour chaque utilisateur
                     Action::factory(rand(5, 20))->create([
                         'user_id' => $user->id,
                         'challenge_id' => rand(1, 4),
