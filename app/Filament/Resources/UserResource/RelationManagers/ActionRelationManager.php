@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -58,13 +59,26 @@ class ActionRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-                TextColumn::make('status'),
-                TextColumn::make('user.name')->label('User Name'),
+                TextColumn::make('status')->label('Status')->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'accepted' => 'success',
+                        'pending' => 'warning',
+                        'refused' => 'danger',
+                    }),
+                // TextColumn::make('user.name')->label('User Name'),
                 TextColumn::make('trash.name')->label('Déchet'),
                 TextColumn::make('challenge.points')
                     ->label('Points')
                     ->badge()
                     ->getStateUsing(fn ($record) => $record->challenge->points * $record->quantity),
+                    ImageColumn::make('image_action')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->height(100),
+                ImageColumn::make('image_throw')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->height(100),
             ])
             ->filters([
                 //

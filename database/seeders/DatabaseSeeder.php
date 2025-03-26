@@ -51,7 +51,10 @@ class DatabaseSeeder extends Seeder
                         'challenge_id' => rand(1, 4),
                         'trash_id' => $trash->id,
                         'image_action' => 'images/bouteille.jpg',
-                    ]);
+                    ])->each(function ($action) {
+                        $action->created_at = now()->subDays(rand(0, 15))->setTime(rand(0, 23), rand(0, 59), rand(0, 59));
+                        $action->save();
+                    });
                 }
             });
         });
